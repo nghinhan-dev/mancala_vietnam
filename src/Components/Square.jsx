@@ -17,10 +17,10 @@ export default function Square(props) {
       ) : props.data.id > 6 && props.data.id < 12 ? (
         <div
           className={`square ${
-            props.isPickSquare && !props.isPlayerTwoNext ? "" : "no_cursor"
+            props.isPickSquare && props.isPlayerTwoNext ? "" : "no_cursor"
           } `}
           onClick={
-            props.isPickSquare && !props.isPlayerTwoNext ? props.click : null
+            props.isPickSquare && props.isPlayerTwoNext ? props.click : null
           }
         >
           {renderBall}
@@ -28,10 +28,10 @@ export default function Square(props) {
       ) : (
         <div
           className={`square ${
-            props.isPickSquare && props.isPlayerTwoNext ? "" : "no_cursor"
+            props.isPickSquare && !props.isPlayerTwoNext ? "" : "no_cursor"
           } `}
           onClick={
-            props.isPickSquare && props.isPlayerTwoNext ? props.click : null
+            props.isPickSquare && !props.isPlayerTwoNext ? props.click : null
           }
         >
           {renderBall}

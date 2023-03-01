@@ -11,9 +11,9 @@ export default function Board() {
     direct: "",
     isPlayerTwoNext: false,
   });
-  const [playerState, setPlayerState] = useState({
-    pointofPlayer1: 0,
-    pointofPlayer2: 0,
+  const [playerPoint, setPlayerPoint] = useState({
+    player1: 0,
+    player2: 0,
   });
 
   const playerOneForward = [1, 2, 3, 4, 5, 6, 12, 11, 10, 9, 8, 7];
@@ -40,18 +40,63 @@ export default function Board() {
     }
   };
 
+  let addPointToPlayer = (point, isPlayer2) => {
+    if (isPlayer2) {
+      setPlayerPoint((prevState) => ({
+        ...prevState,
+        player2: playerPoint.player2 + point,
+      }));
+      console.log("player 2 point :", playerPoint.player2);
+    } else {
+      setPlayerPoint((prevState) => ({
+        ...prevState,
+        player1: playerPoint.player1 + point,
+      }));
+      console.log("player 1 point :", playerPoint.player1);
+    }
+  };
+
   let updatePlayerPoint = (index, map, data) => {
     let indexMap = map.findIndex((a) => a == index + 1);
-    // let addPoint = 0;
 
     if (data[index].point != 0) {
-      console.log("data[index] :", data[index]);
+      console.log("id", index + 1, "point", data[index].point);
       return data;
     } else {
-      console.log("i'm calculating");
-
       let check_index = map[indexMap] - 1;
-      console.log("data[check_index]:", data[check_index]);
+      console.log("map", map);
+      // let addPoint = 0;
+
+      while (data[check_index].point == 0) {
+        let nextIndex;
+        gameState.direct == "forward"
+          ? (nextIndex = check_index + 1)
+          : (nextIndex = check_index - 1);
+
+        nextIndex == 11 ? (nextIndex = -1) : nextIndex;
+        console.log("nextIndex:", nextIndex);
+        // make sure check_index + 1 = [0,11]
+
+        // addPoint = data[indexMap + 1].point;
+        // take point
+        // addPointToPlayer(addPoint, gameState.isPlayerTwoNext);
+        //update Player Point
+
+        console.log("data[check_index + 1]:", data[nextIndex - 1]);
+        // data[indexMap + 1] = {
+        //   ...data[indexMap + 1],
+        //   point: 0,
+        //   pointArr: [],
+        // };
+
+        indexMap += 2;
+        if (indexMap > 11) {
+          indexMap -= 12;
+        } else if (indexMap > 23) {
+          indexMap -= 24;
+        }
+        check_index = map[indexMap] - 1;
+      }
 
       return data;
     }
@@ -62,18 +107,17 @@ export default function Board() {
 
     let mapDirect = mapByClick(
       gameState.direct,
-      gameState.isPlayerTwoNext ? 1 : 2
+      gameState.isPlayerTwoNext ? 2 : 1
     );
 
-    // console.log("mapDirect:", mapDirect);
-
-    let indexMapDirect = mapDirect.findIndex((a) => a == item.id);
-    // console.log("indexMapDirect:", indexMapDirect);
-
+    let indexOfMap = mapDirect.findIndex((a) => a == item.id);
     let clicked_square_index = boardData.findIndex((a) => {
       return a.id == item.id;
     });
-    // console.log("clicked_square_index:", clicked_square_index, "\n");
+
+    if (boardData[clicked_square_index].point == 0) {
+      return;
+    }
 
     let newState = boardData;
     newState[clicked_square_index] = {
@@ -83,7 +127,8 @@ export default function Board() {
     };
 
     for (let i = 1; i < point + 2; i++) {
-      let indexMap = indexMapDirect + i;
+      // explain why not point + 1!!!
+      let indexMap = indexOfMap + i;
       if (indexMap > 11) {
         indexMap -= 12;
       } else if (indexMap > 23) {
@@ -102,7 +147,6 @@ export default function Board() {
       }
 
       let index = mapDirect[indexMap] - 1;
-      // console.log("index:", index);
       // mapDirect[indexMap] return the id of the square => current index = id - 1 = index of the squares which being +1 point
 
       if (index !== 0 && index !== 11) {
@@ -122,6 +166,7 @@ export default function Board() {
     setBoardData(() => [...newState]);
     setGameState((prevState) => ({
       ...prevState,
+      isPlayerTwoNext: !gameState.isPlayerTwoNext,
       isPickSquare: false,
       isPickDirect: true,
     }));
@@ -138,39 +183,21 @@ export default function Board() {
   ));
 
   let moveBackward = () => {
-    if (!gameState.isPlayerTwoNext) {
-      setGameState(() => ({
-        isPickSquare: true,
-        isPickDirect: false,
-        isPlayerTwoNext: true,
-        direct: "backward",
-      }));
-    } else {
-      setGameState(() => ({
-        isPickSquare: true,
-        isPickDirect: false,
-        isPlayerTwoNext: false,
-        direct: "backward",
-      }));
-    }
+    setGameState((prevState) => ({
+      ...prevState,
+      isPickSquare: true,
+      isPickDirect: false,
+      direct: "backward",
+    }));
   };
 
   let moveForward = () => {
-    if (!gameState.isPlayerTwoNext) {
-      setGameState(() => ({
-        isPickSquare: true,
-        isPickDirect: false,
-        isPlayerTwoNext: true,
-        direct: "forward",
-      }));
-    } else {
-      setGameState(() => ({
-        isPickSquare: true,
-        isPickDirect: false,
-        isPlayerTwoNext: false,
-        direct: "forward",
-      }));
-    }
+    setGameState((prevState) => ({
+      ...prevState,
+      isPickSquare: true,
+      isPickDirect: false,
+      direct: "forward",
+    }));
   };
 
   return (
