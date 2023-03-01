@@ -1,6 +1,6 @@
 ### Explaining _chooseToMove(item)_ function
 
-````javascript
+```javascript
  let chooseToMove = (item) => {
     let point = item.point;
     if (point == 0) {
@@ -76,4 +76,4 @@
     }));
   };
     ```
-````
+
