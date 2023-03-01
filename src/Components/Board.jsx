@@ -104,6 +104,9 @@ export default function Board() {
 
   let chooseToMove = (item) => {
     let point = item.point;
+    if (point == 0) {
+      return;
+    }
 
     let mapDirect = mapByClick(
       gameState.direct,
@@ -115,10 +118,6 @@ export default function Board() {
       return a.id == item.id;
     });
 
-    if (boardData[clicked_square_index].point == 0) {
-      return;
-    }
-
     let newState = boardData;
     newState[clicked_square_index] = {
       ...newState[clicked_square_index],
@@ -127,15 +126,12 @@ export default function Board() {
     };
 
     for (let i = 1; i < point + 2; i++) {
-      // explain why not point + 1!!!
       let indexMap = indexOfMap + i;
       if (indexMap > 11) {
         indexMap -= 12;
       } else if (indexMap > 23) {
         indexMap -= 24;
       }
-      // make indexMap stay in the range of [0,11] (index of mapDirect)
-      // => mapDirect[indexMap] = id  => id - 1 = index
 
       if (i == point + 1) {
         newState = updatePlayerPoint(
@@ -147,7 +143,6 @@ export default function Board() {
       }
 
       let index = mapDirect[indexMap] - 1;
-      // mapDirect[indexMap] return the id of the square => current index = id - 1 = index of the squares which being +1 point
 
       if (index !== 0 && index !== 11) {
         newState[index] = {

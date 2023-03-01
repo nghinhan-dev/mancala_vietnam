@@ -1,41 +1,79 @@
-# Explaining _chooseToMove(item)_ function
+### Explaining _chooseToMove(item)_ function
 
-## 1. What is this function use for?
+````javascript
+ let chooseToMove = (item) => {
+    let point = item.point;
+    if (point == 0) {
+      return;
+    }
+    // condition 1 : how many step to move
+    // condition 2 : step = 0 => choose again!
 
-=> Moving points around the table
+    let mapDirect = mapByClick(
+      gameState.direct,
+      gameState.isPlayerTwoNext ? 2 : 1
+    );
+    // condition 3: which directions, map
 
-## 2. What it need ?
+    let indexOfMap = mapDirect.findIndex((a) => a == item.id);
+    let clicked_square_index = boardData.findIndex((a) => {
+      return a.id == item.id;
+    });
+    // condition 4: where is it
 
-- Need to know which square was clicked
 
-```javascript
-let clicked_square_index = boardData.findIndex((a) => {
-  return a.id == item.id;
-});
-```
 
-- Need to know which direction to move
+    let newState = boardData;
+    newState[clicked_square_index] = {
+      ...newState[clicked_square_index],
+      point: 0,
+      pointArr: [],
+    };
+    // clone data
 
-```javascript
-let mapDirect = mapByClick(direct, playerturn);
-```
+    for (let i = 1; i < point + 2; i++) {
+      // start the loop, chooseToMove only move 'point' steps, 'point + 1' is use for updatePlayerPoint
+      let indexMap = indexOfMap + i;
 
-- Need to know where is it
 
-```javascript
-let indexOfMap = mapDirect.findIndex((a) => a == item.id);
-```
+      if (indexMap > 11) {
+        indexMap -= 12;
+      } else if (indexMap > 23) {
+        indexMap -= 24;
+      }
 
-- How many step to move
+      if (i == point + 1) {
+        newState = updatePlayerPoint(
+          mapDirect[indexMap] - 1,
+          mapDirect,
+          newState
+        );
+        break;
+      }
 
-  ```javascript
-  let point = item.point;
-  ```
+      let index = mapDirect[indexMap] - 1;
 
-  point need to be validate, point == 0 => return
+      if (index !== 0 && index !== 11) {
+        newState[index] = {
+          ...newState[index],
+          point: newState[index].point + 1,
+          pointArr: [...newState[index].pointArr, newState[index].point + 1],
+        };
+      } else {
+        newState[index] = {
+          ...newState[index],
+          point: newState[index].point + 1,
+        };
+      }
+    }
 
-- Clone the gameData to start updating
-
-```javascript
-let newState = boardData;
-```
+    setBoardData(() => [...newState]);
+    setGameState((prevState) => ({
+      ...prevState,
+      isPlayerTwoNext: !gameState.isPlayerTwoNext,
+      isPickSquare: false,
+      isPickDirect: true,
+    }));
+  };
+    ```
+````
