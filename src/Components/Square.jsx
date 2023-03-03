@@ -12,13 +12,25 @@ export default function Square(props) {
           <i className="fa fa-star star">
             <p>{props.data.point}</p>
           </i>
-          <div className="star_space"></div>
+          <div
+            className={`star_space  ${props.data.isGreen ? "bg-green" : ""}`}
+          ></div>
         </div>
       ) : props.data.id > 6 && props.data.id < 12 ? (
         <div
-          className={`square ${
-            props.isPickSquare && props.isPlayerTwoNext ? "" : "no_cursor"
-          } `}
+          className={`square ${props.data.isHover ? "bg-yellow" : ""} ${
+            props.data.isGreen ? "bg-green" : ""
+          } ${props.isPickSquare && props.isPlayerTwoNext ? "" : "no_cursor"} `}
+          onMouseLeave={
+            props.isPickSquare && props.isPlayerTwoNext
+              ? props.mouseLeave
+              : null
+          }
+          onMouseEnter={
+            props.isPickSquare && props.isPlayerTwoNext
+              ? props.mouseEnter
+              : null
+          }
           onClick={
             props.isPickSquare && props.isPlayerTwoNext ? props.click : null
           }
@@ -27,9 +39,21 @@ export default function Square(props) {
         </div>
       ) : (
         <div
-          className={`square ${
+          className={`square ${props.data.isHover ? "bg-yellow" : ""} ${
+            props.data.isGreen ? "bg-green" : ""
+          } ${
             props.isPickSquare && !props.isPlayerTwoNext ? "" : "no_cursor"
           } `}
+          onMouseLeave={
+            props.isPickSquare && !props.isPlayerTwoNext
+              ? props.mouseLeave
+              : null
+          }
+          onMouseEnter={
+            props.isPickSquare && !props.isPlayerTwoNext
+              ? props.mouseEnter
+              : null
+          }
           onClick={
             props.isPickSquare && !props.isPlayerTwoNext ? props.click : null
           }

@@ -52,9 +52,8 @@ export default function Board() {
         }
 
         let ix = map[indexMap] - 1;
-
-        // console.log("data:", data[ix]);
         addPoint = data[ix].point;
+
         addPointToPlayer(addPoint, gameState.isPlayerTwoNext);
 
         if (ix !== 0 && ix !== 11) {
@@ -140,6 +139,8 @@ export default function Board() {
       }
     }
 
+    handleMouseLeave(item);
+
     setBoardData(() => [...newState]);
     setGameState((prevState) => ({
       ...prevState,
@@ -149,6 +150,82 @@ export default function Board() {
     }));
   };
 
+  let handleMouseEnter = (item) => {
+    let point = item.point;
+    if (point == 0) {
+      return;
+    }
+
+    let mapDirect = mapByClick(
+      gameState.direct,
+      gameState.isPlayerTwoNext ? 2 : 1
+    );
+
+    let indexOfMap = mapDirect.findIndex((a) => a == item.id);
+    indexOfMap += item.point;
+    if (indexOfMap > 11) {
+      indexOfMap -= 12;
+    } else if (indexOfMap > 23) {
+      indexOfMap -= 24;
+    }
+
+    let index_locate = mapDirect[indexOfMap] - 1;
+    let hovered_square_index = boardData.findIndex((a) => {
+      return a.id == item.id;
+    });
+
+    let newState = boardData;
+    newState[hovered_square_index] = {
+      ...newState[hovered_square_index],
+      isHover: true,
+    };
+
+    newState[index_locate] = {
+      ...newState[index_locate],
+      isGreen: true,
+    };
+
+    setBoardData(() => [...newState]);
+  };
+
+  let handleMouseLeave = (item) => {
+    let point = item.point;
+    if (point == 0) {
+      return;
+    }
+
+    let mapDirect = mapByClick(
+      gameState.direct,
+      gameState.isPlayerTwoNext ? 2 : 1
+    );
+
+    let indexOfMap = mapDirect.findIndex((a) => a == item.id);
+    indexOfMap += item.point;
+    if (indexOfMap > 11) {
+      indexOfMap -= 12;
+    } else if (indexOfMap > 23) {
+      indexOfMap -= 24;
+    }
+
+    let index_locate = mapDirect[indexOfMap] - 1;
+    let hovered_square_index = boardData.findIndex((a) => {
+      return a.id == item.id;
+    });
+
+    let newState = boardData;
+    newState[hovered_square_index] = {
+      ...newState[hovered_square_index],
+      isHover: false,
+    };
+
+    newState[index_locate] = {
+      ...newState[index_locate],
+      isGreen: false,
+    };
+
+    setBoardData(() => [...newState]);
+  };
+
   let renderSquares = boardData.map((item) => (
     <Square
       key={item.id}
@@ -156,6 +233,8 @@ export default function Board() {
       isPickSquare={gameState.isPickSquare}
       isPlayerTwoNext={gameState.isPlayerTwoNext}
       click={() => chooseToMove(item)}
+      mouseEnter={() => handleMouseEnter(item)}
+      mouseLeave={() => handleMouseLeave(item)}
     />
   ));
 

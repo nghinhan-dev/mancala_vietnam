@@ -12,6 +12,14 @@ body {
   justify-content: center;
 }
 
+.bg-green {
+  background-color: rgba(173, 255, 47, 0.4);
+}
+
+.bg-yellow {
+  background-color: yellow;
+}
+
 @keyframes moveLeft {
   0% {
     opacity: 0.1;
@@ -88,6 +96,7 @@ body {
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
+    z-index: 2;
 
     p {
       position: absolute;
