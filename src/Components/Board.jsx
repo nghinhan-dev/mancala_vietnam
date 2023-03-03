@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import Square from "./Square";
 import Arrow from "./Arrow";
+import Point from "./Point";
 import gameData from "../InitialData";
+import { mapByClick } from "./FuncBoard";
 
 export default function Board() {
   const [boardData, setBoardData] = useState(gameData);
@@ -16,43 +18,17 @@ export default function Board() {
     player2: 0,
   });
 
-  const playerOneForward = [1, 2, 3, 4, 5, 6, 12, 11, 10, 9, 8, 7];
-  const playerOneBackward = [1, 7, 8, 9, 10, 11, 12, 6, 5, 4, 3, 2];
-
-  let mapByClick = (direct, player) => {
-    switch (direct) {
-      case "forward":
-        switch (player) {
-          case 1:
-            return playerOneForward;
-          case 2:
-            return playerOneBackward;
-        }
-        break;
-      case "backward":
-        switch (player) {
-          case 1:
-            return playerOneBackward;
-          case 2:
-            return playerOneForward;
-        }
-        break;
-    }
-  };
-
   let addPointToPlayer = (point, isPlayer2) => {
     if (isPlayer2) {
       setPlayerPoint((prevState) => ({
         ...prevState,
-        player2: playerPoint.player2 + point,
+        player2: prevState.player2 + point,
       }));
-      console.log("player 2 point :", playerPoint.player2);
     } else {
       setPlayerPoint((prevState) => ({
         ...prevState,
-        player1: playerPoint.player1 + point,
+        player1: prevState.player1 + point,
       }));
-      console.log("player 1 point :", playerPoint.player1);
     }
   };
 
@@ -60,41 +36,47 @@ export default function Board() {
     let indexMap = map.findIndex((a) => a == index + 1);
 
     if (data[index].point != 0) {
-      console.log("id", index + 1, "point", data[index].point);
       return data;
     } else {
       let check_index = map[indexMap] - 1;
-      console.log("map", map);
-      // let addPoint = 0;
+      let step = 0;
+      let addPoint = 0;
 
       while (data[check_index].point == 0) {
-        let nextIndex;
-        gameState.direct == "forward"
-          ? (nextIndex = check_index + 1)
-          : (nextIndex = check_index - 1);
-
-        nextIndex == 11 ? (nextIndex = -1) : nextIndex;
-        console.log("nextIndex:", nextIndex);
-        // make sure check_index + 1 = [0,11]
-
-        // addPoint = data[indexMap + 1].point;
-        // take point
-        // addPointToPlayer(addPoint, gameState.isPlayerTwoNext);
-        //update Player Point
-
-        console.log("data[check_index + 1]:", data[nextIndex - 1]);
-        // data[indexMap + 1] = {
-        //   ...data[indexMap + 1],
-        //   point: 0,
-        //   pointArr: [],
-        // };
-
-        indexMap += 2;
+        indexMap++;
+        step++;
         if (indexMap > 11) {
           indexMap -= 12;
         } else if (indexMap > 23) {
           indexMap -= 24;
         }
+
+        let ix = map[indexMap] - 1;
+
+        // console.log("data:", data[ix]);
+        addPoint = data[ix].point;
+        addPointToPlayer(addPoint, gameState.isPlayerTwoNext);
+
+        if (ix !== 0 && ix !== 11) {
+          data[ix] = {
+            ...data[ix],
+            point: 0,
+            pointArr: [],
+          };
+        } else {
+          data[ix] = {
+            ...data[ix],
+            point: 0,
+          };
+        }
+
+        if (step == 5) {
+          return data;
+        }
+
+        indexMap++;
+        indexMap > 11 ? (indexMap -= 12) : "";
+        step++;
         check_index = map[indexMap] - 1;
       }
 
@@ -203,6 +185,7 @@ export default function Board() {
         forwardChoice={() => moveForward(gameState.isPlayerTwoNext)}
       />
       <div className="board">{renderSquares}</div>
+      <Point player1={playerPoint.player1} player2={playerPoint.player2} />
     </div>
   );
 }

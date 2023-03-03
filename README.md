@@ -78,3 +78,12 @@ let chooseToMove = (item) => {
   }));
 };
 ```
+
+### Explaining _updatePlayerPoint(index, map, data)_ function
+
+indexMap = where
+=> map[indexMap] = id of current Square
+
+=> map[indexMap] - 1
+= index of current Square
+= check_index
