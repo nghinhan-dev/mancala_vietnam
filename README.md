@@ -1,6 +1,6 @@
 ### Explaining _chooseToMove(item)_ function
 
-```javascript
+````javascript
 let chooseToMove = (item) => {
   let point = item.point;
   if (point == 0) {
@@ -8,6 +8,14 @@ let chooseToMove = (item) => {
   }
   // condition 1 : how many step to move
   // condition 2 : step = 0 => choose again!
+```javascript
+ let chooseToMove = (item) => {
+    let point = item.point;
+    if (point == 0) {
+      return;
+    }
+    // condition 1 : how many step to move
+    // condition 2 : step = 0 => choose again!
 
   let mapDirect = mapByClick(
     gameState.direct,
@@ -77,7 +85,7 @@ let chooseToMove = (item) => {
     isPickDirect: true,
   }));
 };
-```
+````
 
 ### Explaining _updatePlayerPoint(index, map, data)_ function
 
@@ -86,4 +94,5 @@ indexMap = where
 
 => map[indexMap] - 1
 = index of current Square
-= check_index
+
+indexMap++ => target the next Square by index based on the given id value of map[indexMap] - 1
