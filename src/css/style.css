@@ -20,6 +20,10 @@ body {
   background-color: yellow;
 }
 
+.no_cursor {
+  cursor: default;
+}
+
 @keyframes moveLeft {
   0% {
     opacity: 0.1;
@@ -166,6 +170,23 @@ body {
   transform: translateX(-50%);
 }
 
-.no_cursor {
-  cursor: default;
+.point {
+  display: flex;
+  margin-top: 20px;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.turn {
+  text-align: center;
+}
+.turn h1 {
+  margin-bottom: 50px;
+}
+.turn p {
+  text-align: left;
+  margin: 10px 0px;
+  font-size: 20px;
+  font-style: italic;
+  word-spacing: 0.5px;
 }/*# sourceMappingURL=style.css.map */

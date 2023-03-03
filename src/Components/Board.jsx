@@ -264,7 +264,11 @@ export default function Board() {
         forwardChoice={() => moveForward(gameState.isPlayerTwoNext)}
       />
       <div className="board">{renderSquares}</div>
-      <Point player1={playerPoint.player1} player2={playerPoint.player2} />
+      <Point
+        player1={playerPoint.player1}
+        player2={playerPoint.player2}
+        turn={gameState.isPlayerTwoNext}
+      />
     </div>
   );
 }

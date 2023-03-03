@@ -20,6 +20,11 @@ body {
   background-color: yellow;
 }
 
+.no_cursor {
+  cursor: default;
+}
+
+// Animation
 @keyframes moveLeft {
   0% {
     opacity: 0.1;
@@ -55,6 +60,7 @@ body {
   position: relative;
 }
 
+// BOARD AND SQUARE
 .board {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -143,6 +149,7 @@ body {
   }
 }
 
+// DIRECT
 .directCSS {
   position: absolute;
   font-size: 50px;
@@ -188,6 +195,26 @@ body {
   transform: translateX(-50%);
 }
 
-.no_cursor {
-  cursor: default;
+// POINT
+.point {
+  display: flex;
+  margin-top: 20px;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.turn {
+  text-align: center;
+
+  h1 {
+    margin-bottom: 50px;
+  }
+
+  p {
+    text-align: left;
+    margin: 10px 0px;
+    font-size: 20px;
+    font-style: italic;
+    word-spacing: 0.5px;
+  }
 }
