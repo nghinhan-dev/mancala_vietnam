@@ -1,0 +1,26 @@
+@use "../Board/board";
+@use "../Card/card";
+@use "../Card/moon";
+@use "../Card/arrow";
+@use "./sparkle-animate";
+@use "./sparkle";
+
+:root {
+  --card-height: 150px;
+  --gap: 8px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+$moon: #c7edf8;
+$moon-shade: #b0e3f4;
+$cubic: cubic-bezier(0.39, 0.575, 0.565, 1);
+
+.container {
+  width: calc(var(--card-height) * 7 + var(--gap) * 6);
+  margin: 0 auto;
+}

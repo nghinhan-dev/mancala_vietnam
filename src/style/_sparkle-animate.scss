@@ -1,0 +1,75 @@
+@keyframes glowing--delay_10s_2208305038 {
+  0% {
+    transform: scale(0);
+  }
+  8.333% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0.5px);
+  }
+  16.667% {
+    filter: blur(0px);
+    transform: scale(0);
+  }
+  100% {
+    filter: blur(0px);
+    transform: scale(0);
+  }
+}
+
+@keyframes glowing--delay_14s_3055831734 {
+  0% {
+    transform: scale(0);
+  }
+  6.25% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0.5px);
+  }
+  12.5% {
+    filter: blur(0px);
+    transform: scale(0);
+  }
+  100% {
+    filter: blur(0px);
+    transform: scale(0);
+  }
+}
+
+@keyframes glowing--delay_6s_2740976046 {
+  0% {
+    transform: scale(0);
+  }
+  12.5% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0.5px);
+  }
+  25% {
+    filter: blur(0px);
+    transform: scale(0);
+  }
+  100% {
+    filter: blur(0px);
+    transform: scale(0);
+  }
+}
+
+@keyframes glowing--delay_2s_2319318062 {
+  0% {
+    transform: scale(0);
+  }
+  25% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0.5px);
+  }
+  50% {
+    filter: blur(0px);
+    transform: scale(0);
+  }
+  100% {
+    filter: blur(0px);
+    transform: scale(0);
+  }
+}

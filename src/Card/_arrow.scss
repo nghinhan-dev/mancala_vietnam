@@ -1,0 +1,22 @@
+$moon: #c7edf8;
+@keyframes textGlow {
+  from {
+    text-shadow: 0 0 5px #fff, 0 0 15px #fff, 0 0 25px #e60073;
+  }
+
+  to {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073;
+  }
+}
+
+.arrow {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 65px;
+  color: $moon;
+  animation: textGlow 1s ease-in-out infinite alternate;
+  // position: relative;
+  // z-index: 5;
+}
