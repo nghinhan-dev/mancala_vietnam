@@ -47,16 +47,28 @@
   --gap: 8px;
 }
 
-.move-shadow {
-  animation: moveShadow 0.5s cubic-bezier(0.39, 0.575, 0.565, 1) infinite alternate;
+.locateShadow {
+  animation: locateShadow 0.5s cubic-bezier(0.39, 0.575, 0.565, 1) infinite alternate;
 }
 
-@keyframes moveShadow {
+@keyframes locateShadow {
   0% {
     box-shadow: 0 0 15px var(--shadow-color);
   }
   100% {
     box-shadow: 0 0 35px #00ff37;
+  }
+}
+.movingShadow {
+  animation: movingShadow 0.5s cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+
+@keyframes movingShadow {
+  0% {
+    box-shadow: 0 0 15px var(--shadow-color);
+  }
+  100% {
+    box-shadow: 0 0 35px #ff0;
   }
 }
 .card {
@@ -111,9 +123,20 @@
   align-items: center;
   justify-content: center;
 }
-.big-card svg, .card:nth-child(12) svg, .card:nth-child(1) svg {
-  width: 80%;
+.big-card .UFO svg, .card:nth-child(12) .UFO svg, .card:nth-child(1) .UFO svg {
+  width: 95%;
+  height: 100%;
   filter: drop-shadow(0 0 10px var(--shadow-color));
+}
+.big-card .UFO .ufo__point, .card:nth-child(12) .UFO .ufo__point, .card:nth-child(1) .UFO .ufo__point {
+  font-size: 32px;
+  text-shadow: 0 0 10px #ff0;
+  font-family: "Neonderthaw", cursive;
+  color: #c7edf8;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
 }
 
 .card:nth-child(1) {
@@ -156,11 +179,11 @@
 }
 
 .move-right {
-  animation: move-right 0.7s ease-in-out alternate forwards !important;
+  animation: move-right 0.7s ease-in-out !important;
 }
 
 .move-left {
-  animation: move-left 0.7s ease-in-out alternate forwards !important;
+  animation: move-left 0.7s ease-in-out !important;
 }
 
 @keyframes move-right {

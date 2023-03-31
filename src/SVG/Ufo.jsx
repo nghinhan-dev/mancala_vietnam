@@ -1,8 +1,8 @@
 import React from "react";
 
-export default function Ufo() {
+export default function Ufo(props) {
   return (
-    <>
+    <div className="UFO">
       {/*?xml version="1.0" encoding="iso-8859-1"?*/}
       {/* Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools */}
       <svg
@@ -67,6 +67,7 @@ export default function Ufo() {
           </g>
         </g>
       </svg>
-    </>
+      <p className="ufo__point">{props.point}</p>
+    </div>
   );
 }

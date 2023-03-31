@@ -12,19 +12,35 @@ $moon: #c7edf8;
 $moon-shade: #b0e3f4;
 $cubic: cubic-bezier(0.39, 0.575, 0.565, 1);
 
-.move-shadow {
+.locateShadow {
   // animation: name duration timing-function delay iteration-count direction
   //   fill-mode;
-  animation: moveShadow 0.5s $cubic infinite alternate;
+  animation: locateShadow 0.5s $cubic infinite alternate;
 }
 
-@keyframes moveShadow {
+@keyframes locateShadow {
   0% {
     box-shadow: 0 0 15px var(--shadow-color);
   }
 
   100% {
     box-shadow: 0 0 35px #00ff37;
+  }
+}
+
+.movingShadow {
+  // animation: name duration timing-function delay iteration-count direction
+  //   fill-mode;
+  animation: movingShadow 0.5s $cubic;
+}
+
+@keyframes movingShadow {
+  0% {
+    box-shadow: 0 0 15px var(--shadow-color);
+  }
+
+  100% {
+    box-shadow: 0 0 35px #ff0;
   }
 }
 
@@ -89,11 +105,26 @@ $cubic: cubic-bezier(0.39, 0.575, 0.565, 1);
     display: flex;
     align-items: center;
     justify-content: center;
+    // position: relative;
   }
 
-  svg {
-    width: 80%;
-    filter: drop-shadow(0 0 10px var(--shadow-color));
+  .UFO {
+    svg {
+      width: 95%;
+      height: 100%;
+      filter: drop-shadow(0 0 10px var(--shadow-color));
+    }
+
+    .ufo__point {
+      font-size: 32px;
+      text-shadow: 0 0 10px #ff0;
+      font-family: "Neonderthaw", cursive;
+      color: $moon;
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+    }
   }
 }
 

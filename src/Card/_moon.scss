@@ -29,11 +29,11 @@ $cubic: cubic-bezier(0.39, 0.575, 0.565, 1);
 }
 
 .move-right {
-  animation: move-right 0.7s ease-in-out alternate forwards !important;
+  animation: move-right 0.7s ease-in-out !important;
 }
 
 .move-left {
-  animation: move-left 0.7s ease-in-out alternate forwards !important;
+  animation: move-left 0.7s ease-in-out !important;
 }
 
 @keyframes move-right {

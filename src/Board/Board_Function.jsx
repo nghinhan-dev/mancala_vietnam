@@ -13,8 +13,10 @@ export let mapByClick = (index) => {
 };
 
 export let validateIndex = (index) => {
-  let result = index > 11 ? (index -= 12) : index > 23 ? (index -= 24) : index;
+  // console.log("indexMap:", index);
+  let result = index > 23 ? (index -= 24) : index > 11 ? (index -= 12) : index;
 
+  // console.log("result:", result);
   return result;
 };
 
@@ -48,4 +50,50 @@ export let handlePointerMove = (e) => {
     card.style.setProperty("--mouse-x", `${x}px`);
     card.style.setProperty("--mouse-y", `${y}px`);
   }
+};
+
+export let displayArrow = (id, data) => {
+  let clicked_card_index = data.findIndex((a) => {
+    return a.id == id;
+  });
+
+  let left_index = mapByClick(id - 1)[0];
+  let right_index = mapByClick(id - 1)[1];
+
+  // clone cardsState
+  let newCardsState = data;
+
+  // unchoosen other cards
+  newCardsState = newCardsState.map((card) => ({
+    ...card,
+    isChoosen: false,
+    displayLeftArrow: false,
+    displayRightArrow: false,
+  }));
+
+  // check re-choose the same card
+  if (data[clicked_card_index].isChoosen) {
+    return newCardsState;
+  }
+
+  // chossing a card
+  newCardsState[clicked_card_index] = {
+    ...newCardsState[clicked_card_index],
+    isChoosen: !newCardsState[clicked_card_index].isChoosen,
+  };
+
+  // displaying arrow
+  // left arrow
+  newCardsState[left_index] = {
+    ...newCardsState[left_index],
+    displayLeftArrow: true,
+  };
+
+  // right arrow
+  newCardsState[right_index] = {
+    ...newCardsState[right_index],
+    displayRightArrow: true,
+  };
+
+  return newCardsState;
 };

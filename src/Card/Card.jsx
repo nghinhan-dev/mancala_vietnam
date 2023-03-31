@@ -10,44 +10,38 @@ export default function Square(props) {
 
   let renderArrow = (leftArrow) => {
     if (leftArrow) {
-      return (
-        <i
-          onClick={() => console.log("left arrow was clicked")}
-          className="arrow fa fa-angle-double-left"
-        ></i>
-      );
+      return <i className="arrow fa fa-angle-double-left"></i>;
     } else {
-      return (
-        <i
-          onClick={() => console.log("right arrow was clicked")}
-          className="arrow fa fa-angle-double-right"
-        ></i>
-      );
+      return <i className="arrow fa fa-angle-double-right"></i>;
     }
   };
-
-  // displayLeftArrow: false,
-  // displayRightArrow: false,
 
   return (
     <>
       {props.data.isUFO ? (
         <div
-          className={`card ${props.data.isGreen ? "move-shadow" : ""}`}
+          className={`card ${props.data.isMoving ? "movingShadow" : ""} ${
+            props.data.isGreen ? "locateShadow" : ""
+          }`}
+          onClick={
+            props.data.displayLeftArrow || props.data.displayRightArrow
+              ? props.clickArrow
+              : null
+          }
           onMouseEnter={
             props.data.displayLeftArrow || props.data.displayRightArrow
-              ? props.directHover
+              ? props.hoverArrow
               : null
           }
           onMouseLeave={
             props.data.displayLeftArrow || props.data.displayRightArrow
-              ? props.directLeave
+              ? props.leaveArrow
               : null
           }
         >
           <div className="card-content">
             {!props.data.displayLeftArrow && !props.data.displayRightArrow ? (
-              <Ufo />
+              <Ufo point={props.data.point} />
             ) : (
               renderArrow(props.data.displayLeftArrow)
             )}
@@ -56,24 +50,26 @@ export default function Square(props) {
       ) : props.data.id >= 2 && props.data.id <= 6 ? (
         // Player 1 Cards
         <div
-          className={`card ${props.data.isChoosen ? "choosing-state" : ""} ${
-            props.gameState.isPlayerTwoNext ? "not-allowed" : ""
-          }  ${props.data.isGreen ? "move-shadow" : ""} `}
+          className={`card ${props.data.isMoving ? "movingShadow" : ""} ${
+            props.data.isChoosen ? "choosing-state" : ""
+          } ${props.gameState.isPlayerTwoNext ? "not-allowed" : ""}  ${
+            props.data.isGreen ? "locateShadow" : ""
+          } `}
           onClick={
             props.data.displayLeftArrow || props.data.displayRightArrow
-              ? props.arrowClick
+              ? props.clickArrow
               : props.gameState.isPlayerTwoNext
               ? null
               : props.cardClick
           }
           onMouseEnter={
             props.data.displayLeftArrow || props.data.displayRightArrow
-              ? props.directHover
+              ? props.hoverArrow
               : null
           }
           onMouseLeave={
             props.data.displayLeftArrow || props.data.displayRightArrow
-              ? props.directLeave
+              ? props.leaveArrow
               : null
           }
         >
@@ -90,24 +86,26 @@ export default function Square(props) {
       ) : (
         // Player 2 Cards
         <div
-          className={`card ${props.data.isChoosen ? "choosing-state" : ""} ${
-            props.gameState.isPlayerTwoNext ? "" : "not-allowed"
-          } ${props.data.isGreen ? "move-shadow" : ""}`}
+          className={`card ${props.data.isMoving ? "movingShadow" : ""} ${
+            props.data.isChoosen ? "choosing-state" : ""
+          } ${props.gameState.isPlayerTwoNext ? "" : "not-allowed"} ${
+            props.data.isGreen ? "locateShadow" : ""
+          }`}
           onClick={
             props.data.displayLeftArrow || props.data.displayRightArrow
-              ? props.arrowClick
+              ? props.clickArrow
               : props.gameState.isPlayerTwoNext
               ? props.cardClick
               : null
           }
           onMouseEnter={
             props.data.displayLeftArrow || props.data.displayRightArrow
-              ? props.directHover
+              ? props.hoverArrow
               : null
           }
           onMouseLeave={
             props.data.displayLeftArrow || props.data.displayRightArrow
-              ? props.directLeave
+              ? props.leaveArrow
               : null
           }
         >
