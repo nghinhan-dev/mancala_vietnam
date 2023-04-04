@@ -4,8 +4,6 @@
   --card-height: 150px;
   --shadow-color: rgb(38, 149, 212);
   --gap: 8px;
-
-  // 2695D4
 }
 
 $moon: #c7edf8;
@@ -13,8 +11,6 @@ $moon-shade: #b0e3f4;
 $cubic: cubic-bezier(0.39, 0.575, 0.565, 1);
 
 .locateShadow {
-  // animation: name duration timing-function delay iteration-count direction
-  //   fill-mode;
   animation: locateShadow 0.5s $cubic infinite alternate;
 }
 
@@ -29,8 +25,6 @@ $cubic: cubic-bezier(0.39, 0.575, 0.565, 1);
 }
 
 .movingShadow {
-  // animation: name duration timing-function delay iteration-count direction
-  //   fill-mode;
   animation: movingShadow 0.5s $cubic;
 }
 
@@ -105,7 +99,6 @@ $cubic: cubic-bezier(0.39, 0.575, 0.565, 1);
     display: flex;
     align-items: center;
     justify-content: center;
-    // position: relative;
   }
 
   .UFO {
@@ -133,7 +126,6 @@ $cubic: cubic-bezier(0.39, 0.575, 0.565, 1);
   border-radius: calc(var(--card-height) * 2 + 8px) 19px 19px
     calc(var(--card-height) * 2 + 8px);
   z-index: 2;
-  // box-shadow: 0 0 10px #ffff00;
 }
 
 .card:nth-child(12) {
@@ -142,7 +134,6 @@ $cubic: cubic-bezier(0.39, 0.575, 0.565, 1);
     calc(var(--card-height) * 2 + 8px) 19px;
   grid-column: 7 / span 8;
   z-index: 0;
-  // clip-path: circle(153px at 104% 0%);
 }
 
 .card > .card-content {
@@ -153,5 +144,4 @@ $cubic: cubic-bezier(0.39, 0.575, 0.565, 1);
   position: absolute;
   z-index: 2;
   text-align: center;
-  // cursor: pointer;
 }

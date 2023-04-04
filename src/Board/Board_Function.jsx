@@ -1,4 +1,4 @@
-export let mapByClick = (index) => {
+let mapByClick = (index) => {
   // let mapindex = [0, {1, 2, 3, 4, 5}, {6, 7, 8, 9, 10}, 11];
 
   let left, right;
@@ -20,7 +20,7 @@ export let validateIndex = (index) => {
   return result;
 };
 
-export let mapDirect = (direct, player) => {
+export let getMovingMap = (direct, player) => {
   switch (direct) {
     case "forward":
       switch (player) {

@@ -226,7 +226,8 @@
   position: relative;
   background-color: #c7edf8;
   box-shadow: 0 0 7px #c7edf8, inset -0.5px -0.5px #b0e3f4;
-  margin: 2px;
+  margin: 0 3%;
+  margin-bottom: 10px;
   display: inline-block;
   height: 16px;
   width: 16px;

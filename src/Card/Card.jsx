@@ -20,9 +20,7 @@ export default function Square(props) {
     <>
       {props.data.isUFO ? (
         <div
-          className={`card ${props.data.isMoving ? "movingShadow" : ""} ${
-            props.data.isGreen ? "locateShadow" : ""
-          }`}
+          className={`card ${props.data.isGreen ? "locateShadow" : ""}`}
           onClick={
             props.data.displayLeftArrow || props.data.displayRightArrow
               ? props.clickArrow
@@ -50,11 +48,9 @@ export default function Square(props) {
       ) : props.data.id >= 2 && props.data.id <= 6 ? (
         // Player 1 Cards
         <div
-          className={`card ${props.data.isMoving ? "movingShadow" : ""} ${
-            props.data.isChoosen ? "choosing-state" : ""
-          } ${props.gameState.isPlayerTwoNext ? "not-allowed" : ""}  ${
-            props.data.isGreen ? "locateShadow" : ""
-          } `}
+          className={`card ${props.data.isChoosen ? "choosing-state" : ""} ${
+            props.gameState.isPlayerTwoNext ? "not-allowed" : ""
+          }  ${props.data.isGreen ? "locateShadow" : ""} `}
           onClick={
             props.data.displayLeftArrow || props.data.displayRightArrow
               ? props.clickArrow
@@ -86,11 +82,9 @@ export default function Square(props) {
       ) : (
         // Player 2 Cards
         <div
-          className={`card ${props.data.isMoving ? "movingShadow" : ""} ${
-            props.data.isChoosen ? "choosing-state" : ""
-          } ${props.gameState.isPlayerTwoNext ? "" : "not-allowed"} ${
-            props.data.isGreen ? "locateShadow" : ""
-          }`}
+          className={`card ${props.data.isChoosen ? "choosing-state" : ""} ${
+            props.gameState.isPlayerTwoNext ? "" : "not-allowed"
+          } ${props.data.isGreen ? "locateShadow" : ""}`}
           onClick={
             props.data.displayLeftArrow || props.data.displayRightArrow
               ? props.clickArrow

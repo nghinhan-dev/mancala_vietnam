@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import gameData from "../InitialData";
 import {
   handlePointerMove,
-  mapDirect,
+  getMovingMap,
   displayArrow,
   validateIndex,
 } from "./Board_Function";
@@ -10,9 +10,6 @@ import Card from "../Card/Card";
 
 export default function Board() {
   const [cardsState, setCardsData] = useState(gameData);
-  const [moveState, setMoveState] = useState({
-    movingLeft: false,
-  });
   const [gameState, setGamteState] = useState({
     movingLeft: false,
     isPlayerTwoNext: false,
@@ -37,17 +34,9 @@ export default function Board() {
   let hoverArrow = (isLeft) => {
     let newCardsState = cardsState;
     let direct = isLeft ? "backward" : "forward";
-    isLeft
-      ? setMoveState(() => ({
-          movingLeft: true,
-        }))
-      : setMoveState(() => ({
-          movingLeft: false,
-        }));
     let player = gameState.isPlayerTwoNext ? 2 : 1;
 
-    let gameMap = mapDirect(direct, player);
-    setGamteState((prevState) => ({ ...prevState, map: gameMap }));
+    let gameMap = getMovingMap(direct, player);
     let point = newCardsState[gameState.clickedID - 1].point;
 
     // get the locate of clicked card and add 'point' step
@@ -57,13 +46,18 @@ export default function Board() {
 
     // get the locate of the final mutated card
     let indexLocate = gameMap[indexOfMap] - 1;
-    setGamteState((prevState) => ({ ...prevState, targetID: indexLocate }));
-
     // make the final mutated card glowing
     newCardsState[indexLocate] = {
       ...newCardsState[indexLocate],
       isGreen: true,
     };
+
+    setGamteState((prevState) => ({
+      ...prevState,
+      movingLeft: direct,
+      map: gameMap,
+      targetID: indexLocate,
+    }));
 
     setCardsData(() => [...newCardsState]);
   };
@@ -81,21 +75,9 @@ export default function Board() {
   // arrow click handle
   let arrowClick = () => {
     let newCardsState = cardsState;
-
-    newCardsState = newCardsState.map((card) => ({
-      ...card,
-      isGreen: false,
-      displayLeftArrow: false,
-      displayRightArrow: false,
-      isChoosen: false,
-    }));
-
-    let indexOfGameMap = gameState.map.findIndex((id) => {
-      return id == gameState.clickedID;
-    });
-
+    let movingMap = gameState.map;
     let point = newCardsState[gameState.clickedID - 1].point;
-    
+    let cardList = document.querySelectorAll(".card");
 
     newCardsState[gameState.clickedID - 1] = {
       ...newCardsState[gameState.clickedID - 1],
@@ -103,13 +85,57 @@ export default function Board() {
       pointArr: [],
     };
 
-    
-    
-    setGamteState((prevState) => ({
-      ...prevState,
-      isPlayerTwoNext: !prevState.isPlayerTwoNext,
+    newCardsState = newCardsState.map((card) => ({
+      ...card,
+      isChoosen: false,
+      displayLeftArrow: false,
+      displayRightArrow: false,
+      isGreen: false,
     }));
-    
+
+    for (let index = 1; index <= point; index++) {
+      setTimeout(() => {
+        document.getElementById("arrowClick").play();
+        setCardsData(() => [...newCardsState]);
+
+        let indexOfMap = validateIndex(
+          movingMap.findIndex((a) => a == gameState.clickedID) + index
+        );
+
+        // get the locate of the card
+        let indexLocate = movingMap[indexOfMap] - 1;
+
+        // indicate which card is changing point
+        cardList[indexLocate].classList.add("movingShadow");
+        setTimeout(() => {
+          cardList[indexLocate].classList.remove("movingShadow");
+        }, 500);
+
+        // update card
+        if (indexLocate == 0 || indexLocate == 11) {
+          newCardsState[indexLocate] = {
+            ...newCardsState[indexLocate],
+            point: newCardsState[indexLocate].point + 1,
+          };
+        } else {
+          newCardsState[indexLocate] = {
+            ...newCardsState[indexLocate],
+            point: newCardsState[indexLocate].point + 1,
+            pointArr: [
+              ...newCardsState[indexLocate].pointArr,
+              newCardsState[indexLocate].point + 1,
+            ],
+          };
+        }
+      }, 500 * index);
+    }
+
+    setTimeout(() => {
+      setGamteState((prevState) => ({
+        ...prevState,
+        isPlayerTwoNext: !prevState.isPlayerTwoNext,
+      }));
+    }, 500 * point);
   };
 
   let renderCards = cardsState.map((item) => (
