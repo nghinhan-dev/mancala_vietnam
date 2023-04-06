@@ -4,6 +4,7 @@
 @use "../Card/arrow";
 @use "./sparkle-animate";
 @use "./sparkle";
+@use "../Point/point";
 
 :root {
   --card-height: 150px;
@@ -23,4 +24,10 @@ $cubic: cubic-bezier(0.39, 0.575, 0.565, 1);
 .container {
   width: calc(var(--card-height) * 7 + var(--gap) * 6);
   margin: 0 auto;
+}
+
+#testBtn {
+  display: none;
+  position: relative;
+  z-index: 5;
 }

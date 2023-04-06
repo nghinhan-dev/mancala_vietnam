@@ -49,12 +49,12 @@ export default function Square(props) {
         // Player 1 Cards
         <div
           className={`card ${props.data.isChoosen ? "choosing-state" : ""} ${
-            props.gameState.isPlayerTwoNext ? "not-allowed" : ""
+            props.isPlayerTwoNext ? "not-allowed" : ""
           }  ${props.data.isGreen ? "locateShadow" : ""} `}
           onClick={
             props.data.displayLeftArrow || props.data.displayRightArrow
               ? props.clickArrow
-              : props.gameState.isPlayerTwoNext
+              : props.isPlayerTwoNext
               ? null
               : props.cardClick
           }
@@ -71,7 +71,7 @@ export default function Square(props) {
         >
           <div
             className={`card-content ${
-              props.gameState.isPlayerTwoNext ? "new-moon" : ""
+              props.isPlayerTwoNext ? "new-moon" : ""
             }`}
           >
             {!props.data.displayLeftArrow && !props.data.displayRightArrow
@@ -83,12 +83,12 @@ export default function Square(props) {
         // Player 2 Cards
         <div
           className={`card ${props.data.isChoosen ? "choosing-state" : ""} ${
-            props.gameState.isPlayerTwoNext ? "" : "not-allowed"
+            props.isPlayerTwoNext ? "" : "not-allowed"
           } ${props.data.isGreen ? "locateShadow" : ""}`}
           onClick={
             props.data.displayLeftArrow || props.data.displayRightArrow
               ? props.clickArrow
-              : props.gameState.isPlayerTwoNext
+              : props.isPlayerTwoNext
               ? props.cardClick
               : null
           }
@@ -105,7 +105,7 @@ export default function Square(props) {
         >
           <div
             className={`card-content ${
-              props.gameState.isPlayerTwoNext ? "" : "new-moon"
+              props.isPlayerTwoNext ? "" : "new-moon"
             }`}
           >
             {!props.data.displayLeftArrow && !props.data.displayRightArrow

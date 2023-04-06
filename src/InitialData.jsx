@@ -15,6 +15,8 @@ const gameData = [
     displayRightArrow: false,
     point: 5,
     pointArr: [1, 2, 3, 4, 5],
+    // point: 0,
+    // pointArr: [],
   },
   {
     id: 3,
@@ -35,6 +37,8 @@ const gameData = [
     displayRightArrow: false,
     point: 5,
     pointArr: [1, 2, 3, 4, 5],
+    // point: 1,
+    // pointArr: [1],
   },
   {
     id: 5,
@@ -65,6 +69,8 @@ const gameData = [
     displayRightArrow: false,
     point: 5,
     pointArr: [1, 2, 3, 4, 5],
+    // point: 0,
+    // pointArr: [],
   },
   {
     id: 8,
@@ -85,6 +91,8 @@ const gameData = [
     displayRightArrow: false,
     point: 5,
     pointArr: [1, 2, 3, 4, 5],
+    // point: 0,
+    // pointArr: [],
   },
   {
     id: 10,
@@ -95,6 +103,8 @@ const gameData = [
     displayRightArrow: false,
     point: 5,
     pointArr: [1, 2, 3, 4, 5],
+    // point: 0,
+    // pointArr: [],
   },
   {
     id: 11,

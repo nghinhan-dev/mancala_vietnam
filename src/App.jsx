@@ -3,8 +3,14 @@ import Board from "./Board/Board";
 function App() {
   return (
     <div className="game">
+      {/* arrow click sound */}
       <audio id="arrowClick">
         <source src="/sound/card.mp3" type="audio/mpeg" />
+      </audio>
+
+      {/* get point sound */}
+      <audio id="getPoint">
+        <source src="/sound/get-point.mp3" type="audio/mpeg" />
       </audio>
 
       <Board />
