@@ -21,13 +21,34 @@ export default function Board() {
     player2Point: 0,
   });
 
-  let reportPoint = () => {
-    // 0 + 1 + 2 + 3 + 4
-    const sum = cardsState.reduce((accumulator, currentValue) => {
-      console.log("currentValue:", currentValue.point);
-      return accumulator + currentValue.point;
-    }, 0);
+  // let reportPoint = () => {
+  //   // 0 + 1 + 2 + 3 + 4
+  //   const sum = cardsState.reduce((accumulator, currentValue) => {
+  //     console.log("currentValue:", currentValue.point);
+  //     return accumulator + currentValue.point;
+  //   }, 0);
+  //   console.log("sum:", sum);
+  // };
+
+  let changeTurn = (isP2) => {
+    let sum = 0;
+    if (isP2) {
+      for (let index = 1; index < 6; index++) {
+        sum += cardsState[index].point;
+      }
+    } else {
+      for (let index = 6; index < 11; index++) {
+        sum += cardsState[index].point;
+      }
+    }
+
     console.log("sum:", sum);
+    if (sum == 0) {
+      setGamteState((prevState) => ({
+        ...prevState,
+        isPlayerTwoNext: !prevState.isPlayerTwoNext,
+      }));
+    }
   };
 
   // manage Game State
@@ -108,7 +129,6 @@ export default function Board() {
 
     for (let index = 1; index <= point; index++) {
       setTimeout(() => {
-        console.log("im for loop");
         document.getElementById("arrowClick").play();
         setCardsData(() => [...newCardsState]);
 
@@ -161,11 +181,12 @@ export default function Board() {
     }
 
     setTimeout(() => {
-      console.log("hello am i before you");
       setGamteState((prevState) => ({
         ...prevState,
         isPlayerTwoNext: !prevState.isPlayerTwoNext,
       }));
+
+      changeTurn(gameState.isPlayerTwoNext);
     }, 500 * point);
   };
 
@@ -257,9 +278,9 @@ export default function Board() {
       <div id="board" onPointerMove={(e) => handlePointerMove(e)}>
         {renderCards}
       </div>
-      <button id="testBtn" onClick={() => reportPoint()}>
-        GetPoin
-      </button>
+      {/* <button id="testBtn" onClick={() => reportPoint()}>
+        Get Total Point
+      </button> */}
     </div>
   );
 }

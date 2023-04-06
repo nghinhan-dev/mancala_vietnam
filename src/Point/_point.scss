@@ -10,16 +10,6 @@
   justify-content: space-between;
   align-items: center;
 
-  h3 {
-    position: absolute;
-    // top: -1px;
-    left: 51%;
-    font-size: 63px;
-    transform: translateX(-50%);
-    text-shadow: 0 0 5px #c7edf8;
-    color: yellow;
-  }
-
   .currentPlayer {
     color: #00ff37;
     animation: currentPlayerText 1.4s ease-in infinite;
@@ -35,6 +25,33 @@
 
   h1 {
     font-size: 40px;
+  }
+}
+
+.gameState {
+  h3 {
+    position: absolute;
+    // top: -1px;
+    left: 51%;
+    font-size: 63px;
+    transform: translateX(-50%);
+    text-shadow: 0 0 5px #c7edf8;
+    color: yellow;
+  }
+}
+
+.show_winner {
+  .playerState {
+    display: none;
+  }
+
+  .winner_notification {
+    font-family: "Ubuntu", sans-serif;
+    font-style: italic;
+    display: flex;
+    position: relative;
+    z-index: 3;
+    top: -120px;
   }
 }
 

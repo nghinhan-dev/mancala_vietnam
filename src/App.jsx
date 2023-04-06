@@ -13,6 +13,11 @@ function App() {
         <source src="/sound/get-point.mp3" type="audio/mpeg" />
       </audio>
 
+      {/* get point sound */}
+      <audio id="winnerAu">
+        <source src="/sound/winner.mp3" type="audio/mpeg" />
+      </audio>
+
       <Board />
 
       <div className="sparkle">

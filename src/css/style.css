@@ -433,14 +433,6 @@
   justify-content: space-between;
   align-items: center;
 }
-.playerState h3 {
-  position: absolute;
-  left: 51%;
-  font-size: 63px;
-  transform: translateX(-50%);
-  text-shadow: 0 0 5px #c7edf8;
-  color: yellow;
-}
 .playerState .currentPlayer {
   color: #00ff37;
   animation: currentPlayerText 1.4s ease-in infinite;
@@ -454,6 +446,27 @@
 }
 .playerState h1 {
   font-size: 40px;
+}
+
+.gameState h3 {
+  position: absolute;
+  left: 51%;
+  font-size: 63px;
+  transform: translateX(-50%);
+  text-shadow: 0 0 5px #c7edf8;
+  color: yellow;
+}
+
+.show_winner .playerState {
+  display: none;
+}
+.show_winner .winner_notification {
+  font-family: "Ubuntu", sans-serif;
+  font-style: italic;
+  display: flex;
+  position: relative;
+  z-index: 3;
+  top: -120px;
 }
 
 @keyframes currentPlayerText {
@@ -478,10 +491,4 @@
 .container {
   width: calc(var(--card-height) * 7 + var(--gap) * 6);
   margin: 0 auto;
-}
-
-#testBtn {
-  display: none;
-  position: relative;
-  z-index: 5;
 }/*# sourceMappingURL=style.css.map */
