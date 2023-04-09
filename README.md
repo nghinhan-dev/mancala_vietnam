@@ -1,98 +1,28 @@
-### Explaining _chooseToMove(item)_ function
+Welcome to Mancala Vietnam, a web-based implementation of the traditional Vietnamese board game "O An Quan". This project aims to provide an online platform for people to play this game, as well as to introduce this traditional Vietnamese game to the world.
 
-````javascript
-let chooseToMove = (item) => {
-  let point = item.point;
-  if (point == 0) {
-    return;
-  }
-  // condition 1 : how many step to move
-  // condition 2 : step = 0 => choose again!
-```javascript
- let chooseToMove = (item) => {
-    let point = item.point;
-    if (point == 0) {
-      return;
-    }
-    // condition 1 : how many step to move
-    // condition 2 : step = 0 => choose again!
+##Table of Contents
+-About the Game
+-Game Rules
+-How to Play
+-Features
 
-  let mapDirect = mapByClick(
-    gameState.direct,
-    gameState.isPlayerTwoNext ? 2 : 1
-  );
-  // condition 3: which directions, map
+##About the Game
+Mancala is a generic name for a family of two-player turn-based strategy board games played with small stones, beans, or seeds and rows of holes or pits in the earth, a board or other playing surface. The objective of the game is usually to capture more seeds than the opponent.
 
-  let indexOfMap = mapDirect.findIndex((a) => a == item.id);
+O An Quan (meaning "Mandarin Square Capturing") is a traditional Vietnamese mancala game that has been played for centuries. It is a game of strategy and calculation that can be played by people of all ages.
 
-  let clicked_square_index = boardData.findIndex((a) => {
-    return a.id == item.id;
-  });
-  // condition 4: where is it
+##Game Rules
+The rules of O An Quan are simple yet challenging. Each player has seven small pits and one big pit, called "mancala", on their side of the board. The objective is to capture more seeds than the opponent.
 
-  let newState = boardData;
-  newState[clicked_square_index] = {
-    ...newState[clicked_square_index],
-    point: 0,
-    pointArr: [],
-  };
-  // clone data
+For a detailed explanation of the rules, please see the [Wikipedia page](https://en.wikipedia.org/wiki/O_an_quan).
 
-  for (let i = 1; i < point + 2; i++) {
-    // start the loop, chooseToMove only move 'point' steps, 'point + 1' is use for updatePlayerPoint
-    let indexMap = indexOfMap + i;
-    // (indexOfMap + i) can be > 12
+##How to Play
+Go to the [Mancala Vietnam website](https://642f545419e326000865cd7b--resplendent-hamster-8e0bfe.netlify.app/).
+The game starts with each player having five small pits and one big pit on their side of the board.
+Players take turns moving the seeds from one pit to another.
+The game doesn't end when one player has no more seeds on their side of the board.
+The player with the most seeds in their mancala at the end of the game wins.
+Features
 
-    if (indexMap > 11) {
-      indexMap -= 12;
-    } else if (indexMap > 23) {
-      indexMap -= 24;
-    }
-    // make sure indexMap stay in [0, 11] range, range value of GameData's indexs
-
-    if (i == point + 1) {
-      newState = updatePlayerPoint(
-        mapDirect[indexMap] - 1,
-        mapDirect,
-        newState
-      );
-      break;
-    }
-
-    let index = mapDirect[indexMap] - 1;
-    // mapDirect[indexMap] = which square is next
-    // mapDirect[indexMap] - 1 = next square's index
-
-    if (index !== 0 && index !== 11) {
-      newState[index] = {
-        ...newState[index],
-        point: newState[index].point + 1,
-        pointArr: [...newState[index].pointArr, newState[index].point + 1],
-      };
-    } else {
-      newState[index] = {
-        ...newState[index],
-        point: newState[index].point + 1,
-      };
-    }
-  }
-
-  setBoardData(() => [...newState]);
-  setGameState((prevState) => ({
-    ...prevState,
-    isPlayerTwoNext: !gameState.isPlayerTwoNext,
-    isPickSquare: false,
-    isPickDirect: true,
-  }));
-};
-````
-
-### Explaining _updatePlayerPoint(index, map, data)_ function
-
-indexMap = where
-=> map[indexMap] = id of current Square
-
-=> map[indexMap] - 1
-= index of current Square
-
-indexMap++ => target the next Square by index based on the given id value of map[indexMap] - 1
+##Contributing
+Contributions are always welcome! If you find a bug or have a suggestion, please open an issue on the GitHub repository. If you want to contribute code, please fork the repository and create a pull request with your changes.

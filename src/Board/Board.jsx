@@ -21,15 +21,6 @@ export default function Board() {
     player2Point: 0,
   });
 
-  // let reportPoint = () => {
-  //   // 0 + 1 + 2 + 3 + 4
-  //   const sum = cardsState.reduce((accumulator, currentValue) => {
-  //     console.log("currentValue:", currentValue.point);
-  //     return accumulator + currentValue.point;
-  //   }, 0);
-  //   console.log("sum:", sum);
-  // };
-
   let changeTurn = (isP2) => {
     let sum = 0;
     if (isP2) {
@@ -42,7 +33,6 @@ export default function Board() {
       }
     }
 
-    console.log("sum:", sum);
     if (sum == 0) {
       setGamteState((prevState) => ({
         ...prevState,
